@@ -1,0 +1,173 @@
+Language="VBSCRIPT"
+
+Sub CATMain(firstLineLength as Double, secondLineLength as Double, circle1Radius as Double, circle2Radius as Double, height as Double, depth1 as Double, depth2 as Double)
+'firstLineLength:Długość podstawy;21.0
+'secondLineLength:Długość górnego łączenia;2.5
+'circle1Radius:Promień prawego łuku;12
+'circle2Radius:Promień lewego łuku;11.6
+'height:Wysokość;11.5
+'depth1:Głębokość zewnętrzenej ściany;22.606
+'depth2:Głębokość wewnętrznej ściany;13
+'Description:Skrypt 2 - Rysowanie podstawy
+'Image;Widok XY;C:\Users\micha\Desktop\Makra\Makro2XY.png
+'Image;Perspektywa;C:\Users\micha\Desktop\Makra\Makro2Perspektywa.png
+
+'Dim depth
+'depth = 17
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("PartBody")
+
+Dim sketches1 As Sketches
+Set sketches1 = body1.Sketches
+
+Dim originElements1 As OriginElements
+Set originElements1 = part1.OriginElements
+
+Dim reference1 As AnyObject
+Set reference1 = originElements1.PlaneYZ
+
+Dim sketch1 As Sketch
+Set sketch1 = sketches1.Add(reference1)
+
+Dim arrayOfVariantOfDouble1(8)
+arrayOfVariantOfDouble1(0) = 0.000000
+arrayOfVariantOfDouble1(1) = 0.000000
+arrayOfVariantOfDouble1(2) = 0.000000
+arrayOfVariantOfDouble1(3) = 0.000000
+arrayOfVariantOfDouble1(4) = 1.000000
+arrayOfVariantOfDouble1(5) = 0.000000
+arrayOfVariantOfDouble1(6) = 0.000000
+arrayOfVariantOfDouble1(7) = 0.000000
+arrayOfVariantOfDouble1(8) = 1.000000
+sketch1.SetAbsoluteAxisData arrayOfVariantOfDouble1
+
+part1.InWorkObject = sketch1
+
+Dim factory2D1 As Factory2D
+Set factory2D1 = sketch1.OpenEdition()
+
+Dim axis2D1 As GeometricElement
+Set axis2D1 = sketch1.GeometricElements.Item("AbsoluteAxis")
+
+Dim line2D1 As CATBaseDispatch
+Set line2D1 = axis2D1.GetItem("HDirection")
+
+line2D1.ReportName = 1
+
+Dim line2D2 As CATBaseDispatch
+Set line2D2 = axis2D1.GetItem("VDirection")
+
+line2D2.ReportName = 2
+
+Dim point2D1 As Line2D
+Set point2D1 = factory2D1.CreatePoint(-10, 0)
+point2D1.ReportName = 3
+
+Dim point2D2 As Line2D
+Set point2D2 = factory2D1.CreatePoint(firstLineLength-10, 0)
+point2D2.ReportName = 4
+
+Dim line2D3 As Line2D
+Set line2D3 = factory2D1.CreateLine(-10,0,firstLineLength-10,0)
+line2D3.ReportName = 5
+line2D3.StartPoint = point2D1
+line2D3.EndPoint = point2D2
+
+Dim point2D3 As Point2D
+Set point2D3 = factory2D1.CreatePoint(-10+firstLineLength-circle1Radius, 0.000000)
+
+point2D3.ReportName = 6
+
+Dim point2D4 As Point2D
+Set point2D4 = factory2D1.CreatePoint(secondLineLength-0.08, height)
+
+point2D4.ReportName = 7
+
+Dim circle2D1 As Circle2D
+Set circle2D1 = factory2D1.CreateCircle(-10+firstLineLength-circle1Radius, 0.000000, circle1Radius, 0.000000, 1.281109)
+
+
+circle2D1.CenterPoint = point2D3
+
+circle2D1.ReportName = 8
+
+circle2D1.StartPoint = point2D2
+
+circle2D1.EndPoint = point2D4
+
+Dim point2D5 As Point2D
+Set point2D5 = factory2D1.CreatePoint(-10+circle2Radius, 0.000000)
+
+point2D5.ReportName = 9
+
+Dim point2D6 As Point2D
+Set point2D6 = factory2D1.CreatePoint(secondLineLength-2.42, height)
+
+point2D6.ReportName = 10
+
+Dim circle2D2 As Circle2D
+Set circle2D2 = factory2D1.CreateCircle(-10+circle2Radius, 0.000000, circle2Radius, 1.702197, 3.141593)
+
+circle2D2.CenterPoint = point2D5
+
+circle2D2.ReportName = 11
+
+circle2D2.EndPoint = point2D1
+
+circle2D2.StartPoint = point2D6
+
+Dim line2D4 As Line2D
+Set line2D4 = factory2D1.CreateLine(secondLineLength-2.42, height, secondLineLength-0.08, height)
+
+line2D4.ReportName = 12
+
+line2D4.StartPoint = point2D6
+
+line2D4.EndPoint = point2D4
+
+sketch1.CloseEdition 
+
+
+part1.InWorkObject = sketch1
+
+part1.UpdateObject sketch1
+
+
+part1.InWorkObject = body1
+part1.Update
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim pad1 As Pad
+Set pad1 = shapeFactory1.AddNewPad(sketch1, 20.000000)
+
+Dim limit1 As Limit
+Set limit1 = pad1.FirstLimit
+
+Dim length6 As Length
+Set length6 = limit1.Dimension
+
+length6.Value = depth1
+
+Dim limit2 As Limit
+Set limit2 = pad1.SecondLimit
+
+Dim length7 As Length
+Set length7 = limit2.Dimension
+
+length7.Value = -depth2
+
+part1.UpdateObject pad1
+
+End Sub
