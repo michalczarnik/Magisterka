@@ -1,0 +1,72 @@
+Language="VBSCRIPT"
+
+Sub CATMain(kat as Double)
+'kat:Kąt ścięcia;5
+'Image;Widok od przodu;C:\Users\micha\Desktop\Makra\Makro3.png
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromName("")
+
+Dim draft1 As Draft
+Set draft1 = shapeFactory1.AddNewDraft(reference1, reference1, catNoneDraftNeutralPropagationMode, reference1, 0.000000, 0.000000, 1.000000, catStandardDraftMode, kat, catNoneDraftMultiselectionMode)
+
+Dim draftDomains1 As DraftDomains
+Set draftDomains1 = draft1.DraftDomains
+
+Dim draftDomain1 As DraftDomain
+Set draftDomain1 = draftDomains1.Item(1)
+
+draftDomain1.SetPullingDirection 0.000000, 0.000000, 1.000000
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("PartBody")
+
+Dim shapes1 As Shapes
+Set shapes1 = body1.Shapes
+
+Dim pad1 As Shape
+Set pad1 = shapes1.Item("Pad.2")
+
+Dim reference2 As Reference
+Set reference2 = part1.CreateReferenceFromBRepName("RSur:(Face:(Brp:(Pad.2;0:(Brp:(Sketch.2;23)));None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", pad1)
+
+draftDomain1.AddFaceToDraft reference2
+
+Dim reference3 As Reference
+Set reference3 = part1.CreateReferenceFromBRepName("RSur:(Face:(Brp:(Pad.1;2);None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", pad1)
+
+draftDomain1.AddFaceToDraft reference3
+
+Dim reference4 As Reference
+Set reference4 = part1.CreateReferenceFromBRepName("RSur:(Face:(Brp:(Pad.2;0:(Brp:(Sketch.2;21)));None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", pad1)
+
+draftDomain1.AddFaceToDraft reference4
+
+draftDomain1.SetPullingDirection 0.000000, 0.000000, 1.000000
+
+Dim originElements1 As OriginElements
+Set originElements1 = part1.OriginElements
+
+Dim hybridShapePlaneExplicit1 As AnyObject
+Set hybridShapePlaneExplicit1 = originElements1.PlaneXY
+
+Dim reference5 As Reference
+Set reference5 = part1.CreateReferenceFromObject(hybridShapePlaneExplicit1)
+
+draftDomain1.NeutralElement = reference5
+
+part1.UpdateObject draft1
+
+End Sub
