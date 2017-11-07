@@ -13,6 +13,7 @@
 *.userprefs
 
 # Build results
+!bin/Debug/CatiaPlugin2.exe
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -20,7 +21,6 @@
 x64/
 x86/
 bld/
-[Bb]in/
 [Oo]bj/
 [Ll]og/
 
