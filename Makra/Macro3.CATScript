@@ -1,16 +1,41 @@
 Language="VBSCRIPT"
 
-Sub CATMain(pZL as Double,dZL as Double,pOG as Double,dGL as Double,dWL1 as Double,dDL as Double,dWL2 as Double,pO1 as Double,pO2 as Double,gZS as Double)
-'pZL:Przesunięcie zewnętrznej lini;20.6
-'dZL:Długość zewnętrznej lini;27.427827
-'pOG:Przesunięcie od góry;2.427827
-'dGL:Dgługość górnej lini;7.6
-'dWL1:Dłguość wewnętrznej lini 1;19.427827
-'dDL:Długość dolnej lini;5
-'dWL2:Długość wewnętrznej lini 2;40.235383
-'pO1:Promień pierwszego okręgu;8
-'pO2:Promień drugiego okręgu;17
-'gZS:Wartość głębokość zewnętrznej ściany z poprzedniego skryptu;20.606
+Sub CATMain()
+
+Dim var1
+var1 = 31.718615
+Dim var2
+var2 = 61.634789
+Dim var3 
+var3 = 65.235383
+Dim var4
+var4 = 18.322432
+Dim var5
+var5 = 33.500000
+Dim var6
+var6 = 20.600000
+Dim var7
+var7 = 25.000000
+Dim var8
+var8 = 2.427827
+Dim var9
+var9 = 13.000000
+Dim var10
+var10 = 17.000000
+dim var11
+var11 = 5.000000
+Dim var12
+var12 = 8.000000
+Dim var13
+var13 = 4.712389
+Dim var14
+var14 = 6.283185
+Dim var15
+var15 = 3.600000
+Dim var16
+var16 = 5.759587
+Dim var17
+var17 = 22.606000
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument
@@ -70,17 +95,17 @@ Set line2D2 = axis2D1.GetItem("VDirection")
 line2D2.ReportName = 2
 
 Dim point2D1 As Point2D
-Set point2D1 = factory2D1.CreatePoint(dDL-5, 31.718615)
+Set point2D1 = factory2D1.CreatePoint(0.000000, var1)
 
 point2D1.ReportName = 3
 
 Dim point2D2 As Point2D
-Set point2D2 = factory2D1.CreatePoint(dDL-5, -61.634789)
+Set point2D2 = factory2D1.CreatePoint(0.000000, -var2)
 
 point2D2.ReportName = 4
 
 Dim line2D3 As Line2D
-Set line2D3 = factory2D1.CreateLine(dDL-5, 31.718615, dDL-5, -61.634789)
+Set line2D3 = factory2D1.CreateLine(0.000000, var1, 0.000000, -var2)
 
 line2D3.ReportName = 5
 
@@ -114,7 +139,7 @@ Set constraint2 = constraints1.AddBiEltCst(catCstTypeVerticality, reference4, re
 constraint2.Mode = catCstModeDrivingDimension
 
 Dim point2D3 As Point2D
-Set point2D3 = factory2D1.CreatePoint(dDL-5, pOG-dZL-dWL2)
+Set point2D3 = factory2D1.CreatePoint(0.000000, -var3)
 
 point2D3.ReportName = 6
 
@@ -130,12 +155,12 @@ Set constraint3 = constraints1.AddBiEltCst(catCstTypeOn, reference6, reference7)
 constraint3.Mode = catCstModeDrivingDimension
 
 Dim point2D4 As Point2D
-Set point2D4 = factory2D1.CreatePoint(pZL-2.277568, pOG-dZL-8.5)
+Set point2D4 = factory2D1.CreatePoint(var4, -var5)
 
 point2D4.ReportName = 7
 
 Dim line2D4 As Line2D
-Set line2D4 = factory2D1.CreateLine(dDL-5, pOG-dZL-dWL2, pZL-2.277568, pOG-dZL-8.500000)
+Set line2D4 = factory2D1.CreateLine(0.000000, -var3, var4, -var5)
 
 line2D4.ReportName = 8
 
@@ -144,17 +169,17 @@ line2D4.StartPoint = point2D3
 line2D4.EndPoint = point2D4
 
 Dim point2D5 As Point2D
-Set point2D5 = factory2D1.CreatePoint(pZL, pOG-dZL)
+Set point2D5 = factory2D1.CreatePoint(var6, -var7)
 
 point2D5.ReportName = 9
 
 Dim point2D6 As Point2D
-Set point2D6 = factory2D1.CreatePoint(pZL, pOG)
+Set point2D6 = factory2D1.CreatePoint(var6, var8)
 
 point2D6.ReportName = 10
 
 Dim line2D5 As Line2D
-Set line2D5 = factory2D1.CreateLine(pZL, pOG-dZL, pZL, pOG)
+Set line2D5 = factory2D1.CreateLine(var6, -var7, var6, var8)
 
 line2D5.ReportName = 11
 
@@ -174,12 +199,12 @@ Set constraint4 = constraints1.AddBiEltCst(catCstTypeVerticality, reference8, re
 constraint4.Mode = catCstModeDrivingDimension
 
 Dim point2D7 As Point2D
-Set point2D7 = factory2D1.CreatePoint(pZL-dGL, pOG)
+Set point2D7 = factory2D1.CreatePoint(var9, var8)
 
 point2D7.ReportName = 12
 
 Dim line2D6 As Line2D
-Set line2D6 = factory2D1.CreateLine(pZL, pOG, pZL-dGL, pOG)
+Set line2D6 = factory2D1.CreateLine(var6, var8, var9, var8)
 
 line2D6.ReportName = 13
 
@@ -199,12 +224,12 @@ Set constraint5 = constraints1.AddBiEltCst(catCstTypeHorizontality, reference10,
 constraint5.Mode = catCstModeDrivingDimension
 
 Dim point2D8 As Point2D
-Set point2D8 = factory2D1.CreatePoint(pZL-dGL, pOG-dWL1)
+Set point2D8 = factory2D1.CreatePoint(var9, -var10)
 
 point2D8.ReportName = 14
 
 Dim line2D7 As Line2D
-Set line2D7 = factory2D1.CreateLine(pZL-dGL, pOG, pZL-dGL, pOG-dWL1)
+Set line2D7 = factory2D1.CreateLine(var9, var8, var9, -var10)
 
 line2D7.ReportName = 15
 
@@ -224,17 +249,17 @@ Set constraint6 = constraints1.AddBiEltCst(catCstTypeVerticality, reference12, r
 constraint6.Mode = catCstModeDrivingDimension
 
 Dim point2D9 As Point2D
-Set point2D9 = factory2D1.CreatePoint(dDL, pOG-dZL)
+Set point2D9 = factory2D1.CreatePoint(var11, -var7)
 
 point2D9.ReportName = 16
 
 Dim point2D10 As Point2D
-Set point2D10 = factory2D1.CreatePoint(dDL-5, pOG-dZL)
+Set point2D10 = factory2D1.CreatePoint(0.000000, -var7)
 
 point2D10.ReportName = 17
 
 Dim line2D8 As Line2D
-Set line2D8 = factory2D1.CreateLine(dDL, pOG-dZL, dDl-5, pOG-dZL)
+Set line2D8 = factory2D1.CreateLine(var11, -var7, -0.000000, -var7)
 
 line2D8.ReportName = 18
 
@@ -265,7 +290,7 @@ Set constraint8 = constraints1.AddBiEltCst(catCstTypeHorizontality, reference16,
 constraint8.Mode = catCstModeDrivingDimension
 
 Dim line2D9 As Line2D
-Set line2D9 = factory2D1.CreateLine(dDL-5, pOG-dZL, dDL-5, pOG-dZL-dWL2)
+Set line2D9 = factory2D1.CreateLine(0.000000, -var7, 0.000000, -var3)
 
 line2D9.ReportName = 19
 
@@ -298,7 +323,7 @@ constraint10.Mode = catCstModeDrivingDimension
 Dim length1 As Dimension
 Set length1 = constraint10.Dimension
 
-length1.Value = pZL
+length1.Value = var6
 
 Dim reference22 As Reference
 Set reference22 = part1.CreateReferenceFromObject(line2D1)
@@ -314,7 +339,7 @@ constraint11.Mode = catCstModeDrivingDimension
 Dim length2 As Dimension
 Set length2 = constraint11.Dimension
 
-length2.Value = pOG-dZL
+length2.Value = var7
 
 Dim shapes1 As Shapes
 Set shapes1 = body1.Shapes
@@ -385,12 +410,12 @@ Set constraint14 = constraints1.AddBiEltCst(catCstTypeOn, reference30, reference
 constraint14.Mode = catCstModeDrivingDimension
 
 Dim point2D11 As Point2D
-Set point2D11 = factory2D1.CreatePoint(dDL, pOG-dWL1)
+Set point2D11 = factory2D1.CreatePoint(var11, -var10)
 
 point2D11.ReportName = 20
 
 Dim circle2D1 As Circle2D
-Set circle2D1 = factory2D1.CreateCircle(dDL, pOG-dWL1, pO1, 4.712389, 6.283185)
+Set circle2D1 = factory2D1.CreateCircle(var11, -var10, var12, var13, var14)
 
 circle2D1.CenterPoint = point2D11
 
@@ -433,15 +458,15 @@ constraint17.Mode = catCstModeDrivingDimension
 Dim length3 As Dimension
 Set length3 = constraint17.Dimension
 
-length3.Value = pO1
+length3.Value = var12
 
 Dim point2D12 As Point2D
-Set point2D12 = factory2D1.CreatePoint(dDl-5+3.600000, pOG-dZL)
+Set point2D12 = factory2D1.CreatePoint(var15, -var7)
 
 point2D12.ReportName = 22
 
 Dim circle2D2 As Circle2D
-Set circle2D2 = factory2D1.CreateCircle(dDl-5+3.600000, pOG-dZL, pO2, 5.759587, 6.283185)
+Set circle2D2 = factory2D1.CreateCircle(var15, -var7, var10, var16, var14)
 
 circle2D2.CenterPoint = point2D12
 
@@ -484,7 +509,7 @@ constraint20.Mode = catCstModeDrivingDimension
 Dim length4 As Dimension
 Set length4 = constraint20.Dimension
 
-length4.Value = pO2
+length4.Value = var10
 
 Dim reference42 As Reference
 Set reference42 = part1.CreateReferenceFromObject(point2D12)
@@ -509,7 +534,7 @@ Dim shapeFactory1 As Factory
 Set shapeFactory1 = part1.ShapeFactory
 
 Dim pad2 As Pad
-Set pad2 = shapeFactory1.AddNewPad(sketch1, 22.606000)
+Set pad2 = shapeFactory1.AddNewPad(sketch1, var17)
 
 Dim limit1 As Limit
 Set limit1 = pad2.FirstLimit
