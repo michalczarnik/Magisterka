@@ -1,0 +1,60 @@
+Language="VBSCRIPT"
+
+Sub CATMain(kat as Double)
+'kat:Kąt ścięcia;5
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromName("")
+
+Dim draft1 As Draft
+Set draft1 = shapeFactory1.AddNewDraft(reference1, reference1, catNoneDraftNeutralPropagationMode, reference1, 0.000000, 0.000000, 1.000000, catStandardDraftMode, kat, catNoneDraftMultiselectionMode)
+
+Dim draftDomains1 As DraftDomains
+Set draftDomains1 = draft1.DraftDomains
+
+Dim draftDomain1 As DraftDomain
+Set draftDomain1 = draftDomains1.Item(1)
+
+draftDomain1.SetPullingDirection 0.000000, 0.000000, 1.000000
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("PartBody")
+
+Dim shapes1 As Shapes
+Set shapes1 = body1.Shapes
+
+Dim draft2 As Shape
+Set draft2 = shapes1.Item("Draft.1")
+
+Dim reference2 As Reference
+Set reference2 = part1.CreateReferenceFromBRepName("RSur:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;11)));None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", draft2)
+
+draftDomain1.AddFaceToDraft reference2
+
+Dim reference3 As Reference
+Set reference3 = part1.CreateReferenceFromBRepName("RSur:(Face:(Brp:(Pad.1;2);None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", draft2)
+
+draftDomain1.NeutralElement = reference3
+
+draftDomain1.SetPullingDirection 1.000000, 0.000000, 0.000000
+
+Dim angle1 As Angle
+Set angle1 = draftDomain1.DraftAngle
+
+angle1.Value = 45.000000
+
+part1.UpdateObject draft1
+
+End Sub
