@@ -1,0 +1,56 @@
+Language="VBSCRIPT"
+
+Sub CATMain(rad as Double)
+'rad:Promień wcięcia;2
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromName("")
+
+Dim constRadEdgeFillet1 As ConstRadEdgeFillet
+Set constRadEdgeFillet1 = shapeFactory1.AddNewSolidEdgeFilletWithConstantRadius(reference1, catTangencyFilletEdgePropagation, 5.000000)
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("Body.2")
+
+Dim shapes1 As Shapes
+Set shapes1 = body1.Shapes
+
+Dim pad1 As Shape
+Set pad1 = shapes1.Item("Pad.3")
+
+Dim reference2 As Reference
+Set reference2 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Pad.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pad.3;0:(Brp:(Sketch.4;13)));None:();Cf11:());Face:(Brp:(Pad.3;0:(Brp:(Sketch.4;11)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", pad1)
+
+constRadEdgeFillet1.AddObjectToFillet reference2
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference3 As Reference
+Set reference3 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Pad.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pad.3;0:(Brp:(Sketch.4;8)));None:();Cf11:());Face:(Brp:(Pad.3;0:(Brp:(Sketch.4;13)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", pad1)
+
+constRadEdgeFillet1.AddObjectToFillet reference3
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim parameters1 As Parameters
+Set parameters1 = part1.Parameters
+
+Dim length1 As Parameter
+Set length1 = parameters1.Item("Part1\Body.2\EdgeFillet.5\CstEdgeRibbon.16\Radius")
+
+length1.Value = rad
+
+part1.UpdateObject constRadEdgeFillet1
+
+End Sub
