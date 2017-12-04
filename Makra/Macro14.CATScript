@@ -1,10 +1,10 @@
 Language="VBSCRIPT"
 
-Sub CATMain(dlgDol as Double, przesOX as Double, wys as Double, dlgGora as Double; przesOXGora as Double, rad1 as Double, rad2 as Double, dlg as Double, przes as Double)
+Sub CATMain(dlgDol as Double, przesOX as Double, wys as Double, dlgGora as Double, przesOXGora as Double, rad1 as Double, rad2 as Double, dlg as Double, przes as Double)
 'dlgDol:Długość dołu;22.7
-'przesOX;Przesunięcie osi X;-0.45
-'wys;Wysokość; 11.5
-'dlgGora;Długość góry;5.417
+'przesOX:Przesunięcie osi X;-0.45
+'wys:Wysokość; 11.5
+'dlgGora:Długość góry;5.417
 'przesOXGora:Przesunięcie osi X na górze;0.0645
 'rad1:Promień prawy;12.2
 'rad2:Promień lewy;11.8
