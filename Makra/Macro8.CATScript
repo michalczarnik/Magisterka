@@ -1,0 +1,127 @@
+Language="VBSCRIPT"
+
+Sub CATMain(rad as Double)
+'rad:Promień zaokrąglenia;2
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromName("")
+
+Dim constRadEdgeFillet1 As ConstRadEdgeFillet
+Set constRadEdgeFillet1 = shapeFactory1.AddNewSolidEdgeFilletWithConstantRadius(reference1, catTangencyFilletEdgePropagation, 5.000000)
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("PartBody")
+
+Dim shapes1 As Shapes
+Set shapes1 = body1.Shapes
+
+Dim draft1 As Shape
+Set draft1 = shapes1.Item("Draft.3")
+
+Dim reference2 As Reference
+Set reference2 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pad.2;0:(Brp:(Sketch.2;21)));None:();Cf11:());Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference2
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference3 As Reference
+Set reference3 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;2);None:();Cf11:());Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference3
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference4 As Reference
+Set reference4 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.2;21)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference4
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference5 As Reference
+Set reference5 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;2);None:();Cf11:());Face:(Brp:(Pocket.1;0:(Brp:(Sketch.3;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference5
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference6 As Reference
+Set reference6 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Pocket.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:((Brp:(Pad.1;1);Brp:(Pad.2;0:(Brp:(Sketch.2;15)))));None:();Cf11:());Face:(Brp:(Pocket.1;0:(Brp:(Sketch.3;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference6
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference7 As Reference
+Set reference7 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Pocket.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;0:(Brp:(Sketch.3;8)));None:();Cf11:());Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference7
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference8 As Reference
+Set reference8 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;1);None:();Cf11:());Face:(Brp:(Pocket.1;0:(Brp:(Sketch.3;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference8
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference9 As Reference
+Set reference9 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;1);None:();Cf11:());Face:(Brp:((Brp:(Pad.1;1);Brp:(Pad.2;0:(Brp:(Sketch.2;15)))));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference9
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference10 As Reference
+Set reference10 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.3);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pocket.1;1);None:();Cf11:());Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference10
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference11 As Reference
+Set reference11 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:((Brp:(Pad.1;1);Brp:(Pad.2;0:(Brp:(Sketch.2;15)))));None:();Cf11:());Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference11
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference12 As Reference
+Set reference12 = part1.CreateReferenceFromBRepName("TgtEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Pad.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:((Brp:(Pad.1;0:(Brp:(Sketch.1;12)));Brp:(Pad.2;2)));None:();Cf11:());Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference12
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim reference13 As Reference
+Set reference13 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:((Brp:(Pad.1;1);Brp:(Pad.2;0:(Brp:(Sketch.2;15)))));None:();Cf11:());Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", draft1)
+
+constRadEdgeFillet1.AddObjectToFillet reference13
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+Dim parameters1 As Parameters
+Set parameters1 = part1.Parameters
+
+Dim length1 As Parameter
+Set length1 = parameters1.Item("Part1\PartBody\EdgeFillet.1\CstEdgeRibbon.1\Radius")
+
+length1.Value = rad
+
+part1.UpdateObject constRadEdgeFillet1
+
+End Sub
