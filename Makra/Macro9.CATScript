@@ -1,0 +1,42 @@
+Language="VBSCRIPT"
+
+Sub CATMain(rad as Double)
+'rad:Promień zaokrąglenia lewy;3
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromName("")
+
+Dim constRadEdgeFillet1 As ConstRadEdgeFillet
+Set constRadEdgeFillet1 = shapeFactory1.AddNewSolidEdgeFilletWithConstantRadius(reference1, catTangencyFilletEdgePropagation, rad)
+
+Dim bodies1 As Bodies
+Set bodies1 = part1.Bodies
+
+Dim body1 As Body
+Set body1 = bodies1.Item("PartBody")
+
+Dim shapes1 As Shapes
+Set shapes1 = body1.Shapes
+
+Dim constRadEdgeFillet2 As Shape
+Set constRadEdgeFillet2 = shapes1.Item("EdgeFillet.1")
+
+Dim reference2 As Reference
+Set reference2 = part1.CreateReferenceFromBRepName("TgtIntersEdge:(GeneratedEdges;MfIE_R20GA;TgtPropagationFillet;FirstOperands:(Draft.1);SecondOperands:();InitEdges:(REdge:(Edge:(Face:(Brp:(Pad.1;2);None:();Cf11:());Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;8)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)))", constRadEdgeFillet2)
+
+constRadEdgeFillet1.AddObjectToFillet reference2
+
+constRadEdgeFillet1.EdgePropagation = catTangencyFilletEdgePropagation
+
+part1.UpdateObject constRadEdgeFillet1
+
+End Sub

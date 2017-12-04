@@ -1,0 +1,28 @@
+Language="VBSCRIPT"
+
+Sub CATMain()
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim shapeFactory1 As Factory
+Set shapeFactory1 = part1.ShapeFactory
+
+Dim originElements1 As OriginElements
+Set originElements1 = part1.OriginElements
+
+Dim hybridShapePlaneExplicit1 As AnyObject
+Set hybridShapePlaneExplicit1 = originElements1.PlaneYZ
+
+Dim reference1 As Reference
+Set reference1 = part1.CreateReferenceFromObject(hybridShapePlaneExplicit1)
+
+Dim mirror1 As Mirror
+Set mirror1 = shapeFactory1.AddNewMirror(reference1)
+
+part1.UpdateObject mirror1
+
+End Sub
