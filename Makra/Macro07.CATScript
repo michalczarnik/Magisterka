@@ -1,6 +1,8 @@
 Language="VBSCRIPT"
 
-Sub CATMain()
+Sub CATMain(kat as Double)
+'kat:Kąt;45
+'Image;Widok prespektywy;Makro7Perspektywa.png
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument
@@ -15,7 +17,7 @@ Dim reference1 As Reference
 Set reference1 = part1.CreateReferenceFromName("")
 
 Dim draft1 As Draft
-Set draft1 = shapeFactory1.AddNewDraft(reference1, reference1, catNoneDraftNeutralPropagationMode, reference1, 0.000000, 0.000000, 1.000000, catStandardDraftMode, 45.000000, catNoneDraftMultiselectionMode)
+Set draft1 = shapeFactory1.AddNewDraft(reference1, reference1, catNoneDraftNeutralPropagationMode, reference1, 0.000000, 0.000000, 1.000000, catStandardDraftMode, kat, catNoneDraftMultiselectionMode)
 
 Dim draftDomains1 As DraftDomains
 Set draftDomains1 = draft1.DraftDomains

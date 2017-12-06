@@ -2,6 +2,7 @@ Language="VBSCRIPT"
 
 Sub CATMain(rad as Double)
 'rad:Promień zaokrąglenia lewy;3
+'Image;Widok perspektywiczny;Makro9.png
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument

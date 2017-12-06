@@ -2,7 +2,7 @@ Language="VBSCRIPT"
 
 Sub CATMain(kat as Double)
 'kat:Kąt ścięcia;5
-'Image;Widok od przodu;C:\Users\micha\Desktop\Makra\Makro3.png
+'Image;Widok kątów;Makro4.png
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument

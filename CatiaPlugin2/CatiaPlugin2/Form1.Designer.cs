@@ -35,6 +35,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             this.macrosPanel.Location = new System.Drawing.Point(19, 136);
             this.macrosPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.macrosPanel.Name = "macrosPanel";
-            this.macrosPanel.Size = new System.Drawing.Size(561, 1212);
+            this.macrosPanel.Size = new System.Drawing.Size(561, 980);
             this.macrosPanel.TabIndex = 1;
             // 
             // paramPanel
@@ -64,12 +65,12 @@
             this.paramPanel.Location = new System.Drawing.Point(632, 136);
             this.paramPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.paramPanel.Name = "paramPanel";
-            this.paramPanel.Size = new System.Drawing.Size(561, 1156);
+            this.paramPanel.Size = new System.Drawing.Size(561, 999);
             this.paramPanel.TabIndex = 2;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(19, 1356);
+            this.button2.Location = new System.Drawing.Point(33, 1217);
             this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(1174, 98);
@@ -102,16 +103,28 @@
             this.tabPage2.Location = new System.Drawing.Point(12, 58);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(176, 30);
+            this.tabPage2.Size = new System.Drawing.Size(1245, 1348);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(33, 1338);
+            this.button3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(1174, 98);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Run All Macros";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // folderSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2486, 1735);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.paramPanel);
@@ -136,6 +149,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

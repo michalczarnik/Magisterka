@@ -2,6 +2,7 @@ Language="VBSCRIPT"
 
 Sub CATMain(rad as Double)
 'rad:Promień zaokrąglenia wewnętrzny;2
+'Image;Widok perspektywiczny;Makro10.png
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument

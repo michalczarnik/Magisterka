@@ -11,7 +11,8 @@ Sub CATMain(pZL as Double,dZL as Double,pOG as Double,dGL as Double,dWL1 as Doub
 'pO1:Promień pierwszego okręgu;8
 'pO2:Promień drugiego okręgu;17
 'gZS:Wartość głębokość zewnętrznej ściany z poprzedniego skryptu;20.606
-
+'Image;Widok od przodu;Makro3.png
+'Image;Widok XY;Makro3XY.png
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument
 

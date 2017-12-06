@@ -52,7 +52,7 @@ namespace CatiaPlugin2
                                     }
                                 }
                             }
-                            else if (line.StartsWith("'"))
+                            if (line.StartsWith("'"))
                             {
                                 if (line.StartsWith("'Description:"))
                                 {
@@ -61,7 +61,7 @@ namespace CatiaPlugin2
                                 else if (line.StartsWith("'Image;"))
                                 {
                                     var obj = line.Split(';');
-                                    macro.Images.Add(obj[1], obj[2]);
+                                    macro.Images.Add(obj[1], path+"\\"+obj[2]);
                                 }
                                 else
                                 {

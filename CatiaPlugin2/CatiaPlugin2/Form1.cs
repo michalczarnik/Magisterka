@@ -16,6 +16,7 @@ namespace CatiaPlugin2
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
             button2.Enabled = false;
+            button3.Enabled = false;
             macrosPanel.AutoScroll = true;
             paramPanel.AutoScroll = true;
             tabControl1.TabPages.Clear();
@@ -60,9 +61,14 @@ namespace CatiaPlugin2
                 button.Click += (sender, e) => MacroButtonClicked(sender, e, macro);
                 macrosPanel.Controls.Add(button);
             }
+
+            if (macros.Count > 0)
+            {
+                button3.Enabled = true;
+            }
         }
 
-        private void RunMacro(object sender, EventArgs e, Macro macro, List<KeyValuePair<string, string>> list)
+        private void RunMacro(object sender, EventArgs e, Macro macro, IEnumerable<KeyValuePair<string, string>> list)
         {
             List<Object> parameters = new List<Object>();
             foreach(var dEntry in list)
@@ -117,8 +123,17 @@ namespace CatiaPlugin2
             tabControl1.TabPages.Clear();
             List<KeyValuePair<string, string>> textBoxToType = new List<KeyValuePair<string, string>>();
             paramPanel.Controls.Clear();
-            var lastHeight = 10; 
-            foreach(var imagePair in macro.Images)
+            var lastHeight = 10;
+
+            Label label1 = new Label();
+            label1.Text = "Current macro: " + macro.FileName.Substring(0, macro.FileName.Length - 10);
+            label1.Location = new Point(5, lastHeight);
+            label1.Width = paramPanel.Width + 50;
+            label1.Font = new Font(label1.Font, FontStyle.Bold);
+            lastHeight += label1.Height;
+            paramPanel.Controls.Add(label1);
+
+            foreach (var imagePair in macro.Images)
             {
                 TabPage tabPage;
                 if (!tabControl1.TabPages.ContainsKey(imagePair.Key))
@@ -129,14 +144,14 @@ namespace CatiaPlugin2
                 try
                 {
                     var image = Image.FromFile(imagePair.Value);
-                    var imageResized = ScaleImage(image, tabPage.Width, tabPage.Height);
-                    tabPage.BackgroundImage = imageResized;
+                    SetupImage(ref tabPage, image);
 
                 }
                 catch (Exception ex)
                 {
                     continue;
                 }
+
             }
             foreach(var param in macro.Parameters)
             {
@@ -186,18 +201,19 @@ namespace CatiaPlugin2
         {
             var height = this.Height;
             var width = this.Width;
-            macrosPanel.Height = height  - macrosPanel.Location.Y * 3;
-            paramPanel.Height = height - paramPanel.Location.Y * 3;
-            button2.Location= new Point(macrosPanel.Location.X + 5,macrosPanel.Height + macrosPanel.Location.Y + 5);
+            macrosPanel.Height = height  - macrosPanel.Location.Y * 4;
+            paramPanel.Height = height - paramPanel.Location.Y * 4;
+            button2.Location = new Point(macrosPanel.Location.X + 5, macrosPanel.Height + macrosPanel.Location.Y + 5);
+            button3.Location = new Point(macrosPanel.Location.X + 5, macrosPanel.Height + macrosPanel.Location.Y + 10 + button2.Height);
             tabControl1.Location = new Point(paramPanel.Location.X + paramPanel.Width + 10, button1.Location.Y);
             tabControl1.Width = width - tabControl1.Location.X - 20;
             tabControl1.Height = button2.Location.Y + button2.Height;
         }
 
-        public static Image ScaleImage(Image image, int maxWidth, int maxHeight)
+        public static void SetupImage(ref TabPage tabPage, Image image)
         {
-            var ratioX = (double)maxWidth / image.Width;
-            var ratioY = (double)maxHeight / image.Height;
+            var ratioX = (double)tabPage.Width / image.Width;
+            var ratioY = (double)tabPage.Height / image.Height;
             var ratio = Math.Min(ratioX, ratioY);
 
             var newWidth = (int)(image.Width * ratio);
@@ -205,10 +221,69 @@ namespace CatiaPlugin2
 
             var newImage = new Bitmap(newWidth, newHeight);
 
+            tabPage.Height = newHeight;
+            tabPage.Width = newWidth;
+
             using (var graphics = Graphics.FromImage(newImage))
                 graphics.DrawImage(image, 0, 0, newWidth, newHeight);
 
-            return newImage;
+            tabPage.BackgroundImage = newImage;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach(var macro in macros)
+            {
+                List<Object> parameters = new List<Object>();
+                foreach(var parameter in macro.Parameters)
+                {
+                    if (parameter.Type.Equals("string", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                        parameters.Add(parameter.DefaultValue);
+                    else if (parameter.Type.Equals("integer", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                    {
+                        if (string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                            parameters.Add(0);
+                        else
+                        {
+                            int val;
+                            if (Int32.TryParse(parameter.DefaultValue, out val))
+                            {
+                                parameters.Add(val);
+                            }
+                            else {
+                                ShowErrorBox(string.Format("There is an error in macro: {0}\nThe parameter {1} is of incorrect type.\nShoudl be {3}", macro.FileName, parameter.DisplayName, parameter.Type));
+                                return;
+                            }
+                        }
+                    }
+                    else if (parameter.Type.Equals("double", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                    {
+                        if (string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                            parameters.Add(0);
+                        else
+                        {
+                            double val;
+                            var text = parameter.DefaultValue.Replace(".", ",");
+                            if (double.TryParse(text, out val))
+                            {
+                                parameters.Add(val);
+                            }
+                            else {
+                                text = text.Replace(",", ".");
+                                if (double.TryParse(text, out val))
+                                {
+                                    parameters.Add(val);
+                                }
+                                else {
+                                    ShowErrorBox(string.Format("There is an error in macro: {0}\nThe parameter {1} is of incorrect type.\nShoudl be {3}", macro.FileName, parameter.DisplayName, parameter.Type));
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+                CatiaService.RunMacro(macro.DirectoryName, macro.FileName, parameters);
+            }
         }
     }
 }

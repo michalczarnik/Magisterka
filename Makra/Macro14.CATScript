@@ -10,6 +10,9 @@ Sub CATMain(dlgDol as Double, przesOX as Double, wys as Double, dlgGora as Doubl
 'rad2:Promień lewy;11.8
 'dlg:Długość formy;30
 'przes:Przesunięcie formy;40.4
+'Image;Widok perspektywiczny;Makro14Perspektywa.png
+'Image;Widok XY;Makro14OX.png
+
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument
 

@@ -9,8 +9,8 @@ Sub CATMain(firstLineLength as Double, secondLineLength as Double, circle1Radius
 'depth1:Głębokość zewnętrzenej ściany;22.606
 'depth2:Głębokość wewnętrznej ściany;13
 'Description:Skrypt 2 - Rysowanie podstawy
-'Image;Widok XY;C:\Users\micha\Desktop\Makra\Makro2XY.png
-'Image;Perspektywa;C:\Users\micha\Desktop\Makra\Makro2Perspektywa.png
+'Image;Widok XY;Makro2XY.png
+'Image;Perspektywa;Makro2Perspektywa.png
 
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument

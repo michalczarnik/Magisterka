@@ -7,6 +7,9 @@ Sub CATMain(wys as Double, gleb as Double, przes as Double, dlg as Double, wysFo
 'gleb:Głębokość formy;2.57
 'przes:Przesunięcie wcięcia;-7
 'dlg:Długość wcięcia;10
+'Image;Widok od góry;Makro6GORA.png
+'Image;Widok XY;Makro6XY.png
+
 Dim partDocument1 As Document
 Set partDocument1 = CATIA.ActiveDocument
 

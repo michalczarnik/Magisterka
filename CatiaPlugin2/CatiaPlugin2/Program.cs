@@ -19,7 +19,7 @@ namespace CatiaPlugin2
             }
             catch(Exception e)
             {
-                MessageBox.Show("Please turn on CATIA.", "Error");
+                MessageBox.Show("There was an error:" + e.Message, "Error");
             }
         }
     }
